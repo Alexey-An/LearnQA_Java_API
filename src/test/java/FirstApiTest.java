@@ -33,4 +33,29 @@ public class FirstApiTest {
                 .orElseThrow(() -> new RuntimeException("заголовок location не найден!"));
         System.out.println(String.format( "%s: %s", location.getName(), location.getValue() ));
     }
+
+    @Test
+    public void testLongRedirect2() {
+        Response response = RestAssured.given()
+                .redirects()
+                .follow(false)
+                .get("https://playground.learnqa.ru/api/long_redirect")
+                .andReturn();
+        int redirectsCount = 0;
+        while (response.getStatusCode() == 301) {
+            Header location = response.getHeaders()
+                    .asList()
+                    .stream()
+                    .filter(header -> "location".equalsIgnoreCase(header.getName()))
+                    .findAny()
+                    .orElseThrow(() -> new RuntimeException("заголовок location не найден!"));
+            response = RestAssured.given()
+                    .redirects()
+                    .follow(false)
+                    .get(location.getValue())
+                    .andReturn();
+            redirectsCount++;
+        }
+        System.out.println(String.format("Количество перенаправлений: %d", redirectsCount));
+    }
 }
