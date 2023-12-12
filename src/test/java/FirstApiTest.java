@@ -31,7 +31,7 @@ public class FirstApiTest {
                 .filter(header -> "location".equalsIgnoreCase(header.getName()))
                 .findAny()
                 .orElseThrow(() -> new RuntimeException("заголовок location не найден!"));
-        System.out.println(String.format( "%s: %s", location.getName(), location.getValue() ));
+        System.out.printf("%s: %s%n", location.getName(), location.getValue());
     }
 
     @Test
@@ -56,6 +56,6 @@ public class FirstApiTest {
                     .andReturn();
             redirectsCount++;
         }
-        System.out.println(String.format("Количество перенаправлений: %d", redirectsCount));
+        System.out.printf("Количество перенаправлений: %d%n", redirectsCount);
     }
 }
