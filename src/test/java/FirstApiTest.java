@@ -4,6 +4,9 @@ import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+
 public class FirstApiTest {
     @Test
     public void testGetText() {
@@ -57,5 +60,32 @@ public class FirstApiTest {
             redirectsCount++;
         }
         System.out.printf("Количество перенаправлений: %d%n", redirectsCount);
+    }
+
+    @Test
+    public void testLongTimeJob() throws InterruptedException {
+        JsonPath response = RestAssured.given()
+                .get("https://playground.learnqa.ru/ajax/api/longtime_job")
+                .jsonPath();
+        String token = response.getString("token");
+        long secondsToWait = response.getLong("seconds") * 1000;
+        
+        String jobStatusNotReady = RestAssured.given()
+                .param("token", token)
+                .get("https://playground.learnqa.ru/ajax/api/longtime_job")
+                .jsonPath()
+                .get("status")
+                .toString();
+        assertEquals("Job is NOT ready", jobStatusNotReady);
+
+        Thread.sleep(secondsToWait);
+
+        JsonPath jobStatusReady = RestAssured.given()
+                .param("token", token)
+                .get("https://playground.learnqa.ru/ajax/api/longtime_job")
+                .andReturn()
+                .jsonPath();
+        assertEquals("Job is ready", jobStatusReady.get("status"));
+        assertEquals("42", jobStatusReady.get("result"));
     }
 }
