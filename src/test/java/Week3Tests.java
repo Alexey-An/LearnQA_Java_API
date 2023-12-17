@@ -20,14 +20,23 @@ public class Week3Tests {
     @Test
     public void testHomeworkCookie() {
         Response response = RestAssured.given()
-                .redirects()
-                .follow(false)
                 .get("https://playground.learnqa.ru/api/homework_cookie")
                 .andReturn();
         response.cookies().forEach((k, v) -> System.out.printf("%s=%s", k,v));
 
         assertTrue(response.cookies().containsKey("HomeWork"));
         assertEquals("hw_value", response.cookies().get("HomeWork"));
+    }
+
+    @Test
+    public void testHomeworkHeader() {
+        Response response = RestAssured.given()
+                .get("https://playground.learnqa.ru/api/homework_header")
+                .andReturn();
+        response.headers().forEach(System.out::println);
+
+        assertTrue(response.headers().hasHeaderWithName("x-secret-homework-header"));
+        assertEquals("Some secret value", response.headers().getValue("x-secret-homework-header"));
     }
 
 }
