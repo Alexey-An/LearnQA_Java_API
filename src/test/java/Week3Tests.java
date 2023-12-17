@@ -1,19 +1,20 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 public class Week3Tests {
 
-    @ParameterizedTest
-    @ValueSource(strings = {"Short string", "Random very long string"})
-    public void testStringLength(String testString) {
-        assertTrue(testString.length() > 15);
+    @Test
+    public void testStringLength() {
+        String longString = "Случайная строка длиннее 15 символов";
+        String veryShort = "VERY_SHORT";
+        String shortString = "Короткая строка";
+        assertTrue(longString.length() > 15);
+        assertFalse(veryShort.length() > 15);
+        assertFalse(shortString.length() > 15);
     }
 
     @Test
