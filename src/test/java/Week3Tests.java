@@ -56,9 +56,9 @@ public class Week3Tests {
                 .get("https://playground.learnqa.ru/ajax/api/user_agent_check")
                 .andReturn();
 
-        assertEquals(platform, response.jsonPath().get("platform"));
-        assertEquals(browser, response.jsonPath().get("browser"));
-        assertEquals(device, response.jsonPath().get("device"));
+        assertEquals(platform, response.jsonPath().get("platform"), "wrong platform");
+        assertEquals(browser, response.jsonPath().get("browser"), "wrong browser");
+        assertEquals(device, response.jsonPath().get("device"), "wrong device");
     }
 
 }
