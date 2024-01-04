@@ -13,9 +13,9 @@ public class User {
 
         private final Random random = new Random();
         private String firstName = random.nextInt(2) == 0 ? "Jane" : "John";
-        private String userName = firstName;
-        private String lastName = "Doe" + random.nextInt(100);
+        private String lastName = "Doe" + random.nextInt(1000);
         private String email = firstName + "_" + lastName + "@mail.com";
+        private String userName = email;
         private String password = "1234554321";
 
         public User build() {

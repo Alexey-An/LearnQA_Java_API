@@ -1,8 +1,8 @@
 package test;
 
+import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import lib.ApiCoreRequests;
 import lib.BaseTestCase;
@@ -24,7 +24,7 @@ public class UserRegisterTest extends BaseTestCase {
     private final String targetURL = "https://playground.learnqa.ru/api/user/";
 
     @Tag("Negative")
-    @Story("Создание пользователя с некорректным email - без символа @")
+    @Description("Создание пользователя с некорректным email - без символа @")
     @Test
     public void createUserWithIncorrectEmail() {
         //ARRANGE
@@ -40,7 +40,7 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     @Tag("Negative")
-    @Story("Создание пользователя без указания одного из полей")
+    @Description("Создание пользователя без указания одного из полей")
     @ParameterizedTest
     @CsvSource({"username", "firstName", "lastName", "email", "password"})
     public void createUserWithOneFieldMissing(String missingField) {
@@ -57,7 +57,7 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     @Tag("Negative")
-    @Story("Создание пользователя с очень коротким именем в один символ")
+    @Description("Создание пользователя с очень коротким именем в один символ")
     @Test
     public void createUserWithSingleCharacterName() {
         //ARRANGE
@@ -74,7 +74,7 @@ public class UserRegisterTest extends BaseTestCase {
     }
 
     @Tag("Negative")
-    @Story("Создание пользователя с очень длинным именем - длиннее 250 символов")
+    @Description("Создание пользователя с очень длинным именем - длиннее 250 символов")
     @Test
     public void createUserWithVeryLongName() {
         //ARRANGE
