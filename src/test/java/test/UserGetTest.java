@@ -29,7 +29,7 @@ public class UserGetTest extends BaseTestCase {
         Response getUserDataResponse = coreRequests.makeGetRequest(userId2TargetURL, authCookie, xCsrfToken);
 
         //ASSERT
-        AssertionsLib.checkUserGetResponseIsCorrect(getUserDataResponse);
+        AssertionsLib.assertUserGetResponseIsCorrect(getUserDataResponse);
     }
 
 }

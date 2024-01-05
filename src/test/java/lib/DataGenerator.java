@@ -9,7 +9,7 @@ public class DataGenerator {
 
     public static String getRandomEmail() {
         String timeStamp = new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
-        return "default_" + timeStamp + "@mail.com";
+        return timeStamp + "@mail.com";
     }
 
     public static Map<String, String> generateDefaultUser() {

@@ -13,10 +13,11 @@ public class User {
 
         private final Random random = new Random();
         private String firstName = random.nextInt(2) == 0 ? "Jane" : "John";
-        private String lastName = "Doe" + random.nextInt(1000);
-        private String email = firstName + "_" + lastName + "@mail.com";
+        private String lastName = "Doe" + random.nextInt(10000);
+        private String email = String.format("%s_%s_%s", firstName.toLowerCase(), lastName.toLowerCase(),
+                DataGenerator.getRandomEmail());
         private String userName = email;
-        private String password = "1234554321";
+        private String password = "12345#54321";
 
         public User build() {
             return new User(this);
