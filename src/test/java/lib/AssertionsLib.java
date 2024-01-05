@@ -61,6 +61,20 @@ public class AssertionsLib {
         );
     }
 
+    public static void assertDeleteNotAllowed(Response deleteUserResponse) {
+        Assertions.assertEquals(400, deleteUserResponse.getStatusCode(),
+                "Нельзя удалять пользователей с ID 1, 2, 3, 4 или 5. Код ответа должен быть 400");
+        Assertions.assertTrue(
+                deleteUserResponse.getBody().asPrettyString().contains("Please, do not delete test users with ID 1, 2, 3, 4 or 5"),
+                "Нельзя удалять пользователей с ID 1, 2, 3, 4 или 5"
+        );
+    }
 
+    public static void assertDeleteUserSuccess(Response deleteUserResponse) {
+        Assertions.assertEquals(404, deleteUserResponse.getStatusCode(),
+                "Данный пользователь должен был быть удален");
+        Assertions.assertTrue(deleteUserResponse.getBody().asPrettyString().contains("User not found"),
+                "Неверный ответ сервера: пользователь должен был быть удален");
+    }
 
 }

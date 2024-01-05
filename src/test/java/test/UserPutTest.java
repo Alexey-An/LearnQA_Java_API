@@ -2,7 +2,6 @@ package test;
 
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
-import lib.ApiCoreRequests;
 import lib.BaseTestCase;
 import lib.DataGenerator;
 import org.junit.jupiter.api.Tag;
@@ -14,12 +13,6 @@ import static lib.AssertionsLib.*;
 
 
 public class UserPutTest extends BaseTestCase {
-
-
-    private final ApiCoreRequests coreRequests = new ApiCoreRequests();
-    private final String targetURL = "https://playground.learnqa.ru/api/user/";
-    private final String loginURL = "https://playground.learnqa.ru/api/user/login";
-
 
     @Tag("Negative")
     @Description("Редактируем данные пользователя, не пройдя авторизацию")
@@ -117,9 +110,4 @@ public class UserPutTest extends BaseTestCase {
         assertFieldValueTooShort(editUserResponse);
     }
 
-    private void removeEntriesFromUserData(Map<String, String> userData, String... fields) {
-        for (String field : fields) {
-            userData.remove(field);
-        }
-    }
 }

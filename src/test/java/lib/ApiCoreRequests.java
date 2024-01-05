@@ -39,6 +39,13 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
+    @Step("Выполняем GET-запрос без авторизации")
+    public Response makeGetRequest(String url) {
+        return RestAssured.given()
+                .get(url)
+                .andReturn();
+    }
+
     @Step("Выполняем PUT-запрос без авторизации")
     public Response makePutRequest(String url, Map<String, String> requestBody) {
         return RestAssured.given()
@@ -57,6 +64,15 @@ public class ApiCoreRequests {
                 .andReturn();
     }
 
+    @Step("Выполняем DELETE-запрос после авторизации")
+    public Response makeDeleteRequest(String url, String cookie, String xCsrfToken) {
+        return RestAssured.given()
+                .cookie("auth_sid", cookie)
+                .header(new Header("x-csrf-token", xCsrfToken))
+                .delete(url)
+                .andReturn();
+    }
+
     @Step("Создаем нового пользователя")
     public Response registerNewUser(String url, Map<String, String> userData) {
         Response createUserResponse = this.makePostRequest(url, userData);
@@ -72,6 +88,16 @@ public class ApiCoreRequests {
     @Step("Редактируем данные пользователя, выполнив авторизацию")
     public Response editUser(String url, String authCookie, String xCsrfToken, Map<String, String> userData) {
         return this.makePutRequest(url, authCookie, xCsrfToken, userData);
+    }
+
+    @Step("Удалить пользователя, выполнив авторизацию")
+    public Response deleteUser(String url, String authCookie, String xCsrfToken, String userId) {
+        return this.makeDeleteRequest(url + userId, authCookie, xCsrfToken);
+    }
+
+    @Step("Запросить данные другого пользователя, не выполняя авторизацию")
+    public Response getUser(String url, String userId) {
+        return this.makeGetRequest(url + userId);
     }
 
 

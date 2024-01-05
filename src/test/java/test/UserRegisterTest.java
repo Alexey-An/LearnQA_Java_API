@@ -4,7 +4,6 @@ import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.restassured.response.Response;
-import lib.ApiCoreRequests;
 import lib.BaseTestCase;
 import lib.DataGenerator;
 import org.junit.jupiter.api.Assertions;
@@ -18,10 +17,6 @@ import java.util.Map;
 @Epic("Создание нового пользователя")
 @Feature("Создание нового пользователя - негативные проверки")
 public class UserRegisterTest extends BaseTestCase {
-
-    private final ApiCoreRequests coreRequests = new ApiCoreRequests();
-
-    private final String targetURL = "https://playground.learnqa.ru/api/user/";
 
     @Tag("Negative")
     @Description("Создание пользователя с некорректным email - без символа @")
@@ -89,6 +84,5 @@ public class UserRegisterTest extends BaseTestCase {
         Assertions.assertTrue(response.getBody().asPrettyString().contains(
                 "The value of 'username' field is too long"), "Неверный текст ответа");
     }
-
 
 }

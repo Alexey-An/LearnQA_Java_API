@@ -1,25 +1,16 @@
 package lib;
 
-import io.restassured.http.Headers;
-import io.restassured.response.Response;
-
 import java.util.Map;
-
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class BaseTestCase {
 
-    protected String getResponseHeader(Response response, String header) {
-        Headers headers =  response.getHeaders();
+    protected final ApiCoreRequests coreRequests = new ApiCoreRequests();
+    protected final String targetURL = "https://playground.learnqa.ru/api/user/";
+    protected final String loginURL = "https://playground.learnqa.ru/api/user/login";
 
-        assertTrue(headers.hasHeaderWithName(header), "Отсутствует заголовок: " + header);
-        return response.getHeader(header);
-    }
-
-    protected String getCookie(Response response, String cookie) {
-        Map<String, String> cookies = response.getCookies();
-
-        assertTrue(cookies.containsKey(cookie), "Отсутствует куки: " + cookie);
-        return response.getCookie(cookie);
+    protected void removeEntriesFromUserData(Map<String, String> userData, String... fields) {
+        for (String field : fields) {
+            userData.remove(field);
+        }
     }
 }
