@@ -3,6 +3,7 @@ package test;
 import io.qameta.allure.Description;
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import lib.BaseTestCase;
 import lib.DataGenerator;
@@ -14,12 +15,13 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Map;
 
-@Epic("Создание нового пользователя")
+@Epic("Тест для эндпоинта https://playground.learnqa.ru/api/user/")
 @Feature("Создание нового пользователя - негативные проверки")
 public class UserRegisterTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Создание пользователя с некорректным email - без символа @")
+    @Story("Создание пользователя с некорректным email - без символа @")
     @Test
     public void createUserWithIncorrectEmail() {
         //ARRANGE
@@ -36,6 +38,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Создание пользователя без указания одного из полей")
+    @Story("Создание пользователя без указания одного из полей")
     @ParameterizedTest
     @CsvSource({"username", "firstName", "lastName", "email", "password"})
     public void createUserWithOneFieldMissing(String missingField) {
@@ -53,6 +56,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Создание пользователя с очень коротким именем в один символ")
+    @Story("Создание пользователя с очень коротким именем в один символ")
     @Test
     public void createUserWithSingleCharacterName() {
         //ARRANGE
@@ -70,6 +74,7 @@ public class UserRegisterTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Создание пользователя с очень длинным именем - длиннее 250 символов")
+    @Story("Создание пользователя с очень длинным именем - длиннее 250 символов")
     @Test
     public void createUserWithVeryLongName() {
         //ARRANGE

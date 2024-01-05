@@ -1,12 +1,17 @@
 package test;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import lib.AssertionsLib;
 import lib.BaseTestCase;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+@Epic("Тест для эндпоинта https://playground.learnqa.ru/api/user/")
+@Feature("Запрос данных пользователя")
 public class UserGetTest extends BaseTestCase {
 
     private final String userId2TargetURL = "https://playground.learnqa.ru/api/user/2";
@@ -15,6 +20,7 @@ public class UserGetTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Авторизовывается одним пользователем, но получить данные пользователя с другим ID")
+    @Story("Авторизовывается одним пользователем, но получить данные пользователя с другим ID")
     @Test
     public void testGetUserData() {
         //ARRANGE

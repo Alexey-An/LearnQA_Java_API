@@ -1,6 +1,9 @@
 package test;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import lib.BaseTestCase;
 import lib.DataGenerator;
@@ -11,11 +14,13 @@ import java.util.Map;
 
 import static lib.AssertionsLib.*;
 
-
+@Epic("Тест для эндпоинта https://playground.learnqa.ru/api/user/")
+@Feature("Редактирование данных пользователя")
 public class UserPutTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Редактируем данные пользователя, не пройдя авторизацию")
+    @Story("Редактируем данные пользователя, не пройдя авторизацию")
     @Test
     public void testEditUserWithoutAuthorization() {
         //ARRANGE
@@ -35,6 +40,7 @@ public class UserPutTest extends BaseTestCase {
 
     @Tag("Positive")
     @Description("Редактируем данные одного пользователя, пройдя авторизацию другим пользователем")
+    @Story("Редактируем данные одного пользователя, пройдя авторизацию другим пользователем")
     @Test
     public void testEditSomeOtherUserAfterAuthorization() {
         //ARRANGE
@@ -63,6 +69,7 @@ public class UserPutTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("После авторизации редактируем свой email, заменив его некорректным, без символа @")
+    @Story("После авторизации редактируем свой email, заменив его некорректным, без символа @")
     @Test
     public void testEditUsersEmail() {
         //ARRANGE
@@ -88,6 +95,7 @@ public class UserPutTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Выполняем авторизацию и редактируем имя пользователя, заменив его строкой длиною один символ")
+    @Story("Выполняем авторизацию и редактируем имя пользователя, заменив его строкой длиною один символ")
     @Test
     public void testEditUsersFirstName() {
         //ARRANGE

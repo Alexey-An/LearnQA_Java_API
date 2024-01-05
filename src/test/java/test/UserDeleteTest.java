@@ -1,6 +1,9 @@
 package test;
 
 import io.qameta.allure.Description;
+import io.qameta.allure.Epic;
+import io.qameta.allure.Feature;
+import io.qameta.allure.Story;
 import io.restassured.response.Response;
 import lib.AssertionsLib;
 import lib.BaseTestCase;
@@ -12,10 +15,13 @@ import org.junit.jupiter.api.Test;
 import java.util.Map;
 
 
+@Epic("Тест для эндпоинта https://playground.learnqa.ru/api/user/")
+@Feature("Удаление пользователя")
 public class UserDeleteTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Удаляем пользователя, id которого 2")
+    @Story("Удаляем пользователя, id которого 2")
     @Test
     public void testDeleteUserId2() {
         //ARRANGE
@@ -35,6 +41,7 @@ public class UserDeleteTest extends BaseTestCase {
 
     @Tag("Positive")
     @Description("Удаляем пользователя")
+    @Story("Удаляем пользователя")
     @Test
     public void testDeleteUser() {
         //ARRANGE
@@ -60,6 +67,7 @@ public class UserDeleteTest extends BaseTestCase {
 
     @Tag("Negative")
     @Description("Удаляем другого пользователя, не себя, после авторизации")
+    @Story("Удаляем другого пользователя, не себя, после авторизации")
     @Test
     public void testDeleteSomeOtherUser() {
         //ARRANGE
